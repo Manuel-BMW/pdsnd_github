@@ -1,4 +1,3 @@
-import time
 import pandas as pd
 import numpy as np
 
@@ -17,7 +16,6 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
 
-        
     CITY_LIST = ['chicago', 'new york city', 'washington']
 
     print("\nPlease choose a city.")
@@ -31,8 +29,6 @@ def get_filters():
 
     city = CITY_INPUT
 
-
-
     MONTH_LIST = ['january', 'february', 'march', 'april', 'june', 'all']
 
     print("\nPlease choose a month.")
@@ -45,8 +41,6 @@ def get_filters():
         MONTH_INPUT = input().lower()
 
     month = MONTH_INPUT
-
-
 
     DAY_LIST = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all']
 
@@ -98,24 +92,19 @@ def load_data(city, month, day):
     return df
 
 
-def time_stats(df):
+def Time_Stats(df):
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
-
     popular_month = df['month'].mode()[0]
 
     print('Most Popular Month (1 = January etc.):', popular_month)
 
-
-
     popular_day = df['day_of_week'].mode()[0]
 
     print('Most Popular Day of Week:', popular_day)
-
-
 
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
@@ -130,7 +119,7 @@ def time_stats(df):
     print('-'*40)
 
 
-def station_stats(df):
+def Station_Stats(df):
     """Displays statistics on the most popular stations and trip."""
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
@@ -152,7 +141,7 @@ def station_stats(df):
     print('-'*40)
 
 
-def trip_duration_stats(df):
+def Trip_Duration_Stats(df):
     """Displays statistics on the total and average trip duration."""
 
     print('\nCalculating Trip Duration...\n')
@@ -167,7 +156,6 @@ def trip_duration_stats(df):
     print('Total travel time in minutes:', total_travel_time_minutes)
     print('Total travel time in hours:', total_travel_time_hours)
 
-
     mean_travel_time_seconds = df['Trip Duration'].mean()
     mean_travel_time_minutes = mean_travel_time_seconds / 60
     mean_travel_time_hours = mean_travel_time_minutes / 60
@@ -179,16 +167,14 @@ def trip_duration_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-def user_stats(df):
+def User_Stats(df):
     """Displays statistics on bikeshare users."""
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
-
     user_types = df['User Type'].value_counts()
     print('Counts of user types:\n', user_types)
-
 
     try:
         gender = df['Gender'].value_counts()
@@ -196,7 +182,6 @@ def user_stats(df):
 
     except:
         print("\nSorry, no data found for 'Gender' in this file.")
-
 
     try:
         earliest_year = int(df['Birth Year'].min())
@@ -214,8 +199,8 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def Display_Data(df):
 
-def display_data(df):
     """Displays raw data upon request."""
 
     start_time = time.time()
@@ -247,11 +232,11 @@ def main():
         city, month, day = get_filters()
         df = load_data(city, month, day)
 
-        display_data(df)
-        time_stats(df)
-        station_stats(df)
-        trip_duration_stats(df)
-        user_stats(df)
+        Display_Data(df)
+        Time_Stats(df)
+        Station_Stats(df)
+        Trip_Duration_Stats(df)
+        User_Stats(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
